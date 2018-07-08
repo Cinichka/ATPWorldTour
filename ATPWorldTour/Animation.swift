@@ -21,5 +21,6 @@ func animateBall(tableView: UITableView) {
 }
 
 func animateBallStop () {
+    
     spinnerBall.removeFromSuperview()
 }
