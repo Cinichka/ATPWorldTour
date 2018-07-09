@@ -11,7 +11,6 @@ class ATPLiveTVC: UITableViewController  {
     var spinner: UIActivityIndicatorView!
     var spinnerBall: UIImageView!
      let imageBall = UIImage(named: "tennis")
-    //var spinner: UIActivityIndicatorView!
     var tournaments = [Tournament]()
     var match = [Match] ()
     var score = [String: String?] ()
@@ -38,7 +37,7 @@ class ATPLiveTVC: UITableViewController  {
                 do {
                     let scores = try JSONDecoder().decode(Scores.self, from: data)
                     self.tournaments = scores.liveScores.tournaments
-                    //print(self.match)
+                    print(self.match)
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                       animateBallStop ()

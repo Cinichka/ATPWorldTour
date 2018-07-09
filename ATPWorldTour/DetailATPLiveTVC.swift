@@ -8,8 +8,7 @@
 
 import UIKit
 
-class DetailATPLiveTVC: UITableViewController {
-    
+class DetailATPLiveTVC: UITableViewController {    
     
     @IBOutlet weak var players: UILabel!
     @IBOutlet weak var fotoTeamOnePlayerOneLable: UILabel!
