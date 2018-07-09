@@ -53,12 +53,13 @@ class DetailATPLiveTVC: UITableViewController {
         super.viewDidLoad()
         animateBall(tableView: tableView)
         tableView.rowHeight = UITableViewAutomaticDimension
+        //if single
         if matchDetail[0].teamOne.partnerID == nil {
-            players.text = matchDetail[0].teamOne.playerOneName + " VS. " + matchDetail[0].teamTwo.playerOneName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
+            players.text = matchDetail[0].teamOne.playerOneName + " vs. " + matchDetail[0].teamTwo.playerOneName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
             countFoto = 2
             
         } else {
-            players.text = matchDetail[0].teamOne.playerOneName + "/" + matchDetail[0].teamOne.playerTwoName + " VS. " + matchDetail[0].teamTwo.playerOneName  + "/" + matchDetail[0].teamTwo.playerTwoName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
+            players.text = matchDetail[0].teamOne.playerOneName + "/" + matchDetail[0].teamOne.playerTwoName + " vs. " + matchDetail[0].teamTwo.playerOneName  + "/" + matchDetail[0].teamTwo.playerTwoName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
             
         }
         
