@@ -2,7 +2,7 @@
 //  DetailATPLiveTVC.swift
 //  ATPWorldTour
 //
-//  Created by Вероника Садовская on 02.07.2018.
+//  Created by Veronika Sadovskaya on 02.07.2018.
 //  Copyright © 2018 Veronika Sadovskaya. All rights reserved.
 //
 
@@ -53,11 +53,11 @@ class DetailATPLiveTVC: UITableViewController {
         super.viewDidLoad()
         animateBall(tableView: tableView)
         tableView.rowHeight = UITableViewAutomaticDimension
-        //if single
+        //if single game
         if matchDetail[0].teamOne.partnerID == nil {
             players.text = matchDetail[0].teamOne.playerOneName + " vs. " + matchDetail[0].teamTwo.playerOneName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
             countFoto = 2
-            
+            // if doubles game
         } else {
             players.text = matchDetail[0].teamOne.playerOneName + "/" + matchDetail[0].teamOne.playerTwoName + " vs. " + matchDetail[0].teamTwo.playerOneName  + "/" + matchDetail[0].teamTwo.playerTwoName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
             
@@ -73,9 +73,12 @@ class DetailATPLiveTVC: UITableViewController {
         timeMatch.text = matchDetail[0].matchTime
         flagPlayerOneTeamOne?.image = UIImage(named: String(matchDetail[0].teamOne.playerOneFlag[flag]))
         flagPlayerOneTeamTwo?.image = UIImage(named: String(matchDetail[0].teamTwo.playerOneFlag[flag]))
+        // if doubles game
         if matchDetail[0].teamOne.partnerID != nil {
             fotoTeamOnePlayerTwoLable.isEnabled = true
             fotoTeamTwoPlayerTwoLable.isEnabled = true
+            fotoTeamOnePlayerTwoImage.isHidden = false
+            fotoTeamTwoPlayerTwoImage.isHidden = false
             playerTwoNameTeamOne.isEnabled = true
             playerTwoNameTeamTwo.isEnabled = true
             fotoTeamOnePlayerTwoLable.text = matchDetail[0].teamOne.playerTwoName
@@ -87,11 +90,13 @@ class DetailATPLiveTVC: UITableViewController {
             flagPlayerTwoTeamTwo?.image = UIImage(named: String(matchDetail[0].teamTwo.playerTwoFlag![flag]))
             playerTwoNameTeamTwo.text = matchDetail[0].teamTwo.playerTwoName
         }
+        //checking the result of the game
         if  matchDetail[0].teamOne.teamStatus == TeamStatus.wonGame {
             imageWinOne.image = UIImage(named: "checked")
         } else {
             imageWinTwo.image = UIImage(named: "checked")
         }
+        //output of results on sets
         guard let setOneTeamOne = Int(matchDetail[0].teamOne.scores["SetOne"]!!) else {return}
         self.setOneTeamOne.isEnabled = true
         self.setOneTeamOne.text = String(setOneTeamOne)
@@ -126,10 +131,9 @@ class DetailATPLiveTVC: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    
+    //loading photo players
     func loadImage(imageURL:String, lable:UIImageView)  {
         DispatchQueue.global(qos: .utility).async {
             guard let imageUrl = URL(string: "https://www.atpworldtour.com/-/ajax/scores/getinitialscores/" + imageURL) else { return }
@@ -143,7 +147,7 @@ class DetailATPLiveTVC: UITableViewController {
                 }
             }
         }
-       
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

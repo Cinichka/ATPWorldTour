@@ -2,7 +2,7 @@
 //  ATPLiveTVC.swift
 //  ATPWorldTour
 //
-//  Created by Вероника Садовская on 28.06.2018.
+//  Created by Veronika Sadovskaya on 28.06.2018.
 //  Copyright © 2018 Veronika Sadovskaya. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 class ATPLiveTVC: UITableViewController  {
     var spinner: UIActivityIndicatorView!
     var spinnerBall: UIImageView!
-     let imageBall = UIImage(named: "tennis")
+    let imageBall = UIImage(named: "tennis")
     var tournaments = [Tournament]()
     var match = [Match] ()
     var score = [String: String?] ()
@@ -25,6 +25,8 @@ class ATPLiveTVC: UITableViewController  {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // loading data
     func sendRequest() {
         let jsonUrl = "https://www.atpworldtour.com/-/ajax/scores/getinitialscores/"
         DispatchQueue.global(qos: .utility).async {
@@ -37,10 +39,10 @@ class ATPLiveTVC: UITableViewController  {
                 do {
                     let scores = try JSONDecoder().decode(Scores.self, from: data)
                     self.tournaments = scores.liveScores.tournaments
-                    print(self.match)
                     DispatchQueue.main.async {
+                        self.tableView.reloadInputViews()
                         self.tableView.reloadData()
-                      animateBallStop ()
+                        animateBallStop ()
                     }
                     
                 } catch let jsonError {
@@ -52,7 +54,6 @@ class ATPLiveTVC: UITableViewController  {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return self.tournaments.count
     }
 
@@ -66,7 +67,7 @@ class ATPLiveTVC: UITableViewController  {
         return "\(self.tournaments[section].name)"
     }
     
-
+// сustomize the section
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
@@ -97,23 +98,28 @@ class ATPLiveTVC: UITableViewController  {
             cell.flagPlayerOneTeamOne?.image = UIImage(named: String(match[indexPath.row].teamOne.playerOneFlag[flag]))
             cell.flagPlayerOneTeamTwo?.image = UIImage(named: String(match[indexPath.row].teamTwo.playerOneFlag[flag]))
             score = match[indexPath.row].teamOne.scores
+        // if the single game
         if  match[indexPath.row].teamOne.playerTwoName == " " {
             cell.playerTwoNameTeamOne.isHidden = true
             cell.flagPlayerTwoTeamOne.isHidden = true
             cell.flagPlayerTwoTeamTwo.isHidden = true
             cell.playerTwoNameTeamTwo.isHidden = true
-            cell.flagPlayerTwoTeamOne.contentMode = .scaleAspectFill
+        
+         // if the pair game
         } else {
             cell.playerTwoNameTeamOne.text = match[indexPath.row].teamOne.playerTwoName
             cell.flagPlayerTwoTeamOne?.image = UIImage(named: String(match[indexPath.row].teamOne.playerTwoFlag![flag]))
             cell.flagPlayerTwoTeamTwo?.image = UIImage(named: String(match[indexPath.row].teamTwo.playerTwoFlag![flag]))
             cell.playerTwoNameTeamTwo.text = match[indexPath.row].teamTwo.playerTwoName
         }
+         //checking the result of the game
         if  match[indexPath.row].teamOne.teamStatus == TeamStatus.wonGame {
             cell.imageWinOne.image = UIImage(named: "checked")
         } else {
             cell.imageWinTwo.image = UIImage(named: "checked")
         }
+        //output of results on sets
+        
         guard let setOneTeamOne = Int(match[indexPath.row].teamOne.scores["SetOne"]!!) else {return cell}
         cell.setOneTeamOne.isEnabled = true
         cell.setOneTeamOne.text = String(setOneTeamOne)
@@ -147,19 +153,15 @@ class ATPLiveTVC: UITableViewController  {
         return cell
     }
     
-   
+   // update the information on the button
     @IBAction func refresh(_ sender: UIBarButtonItem) {
+       animateBall(tableView: tableView)
+       match = [Match] ()
        sendRequest()
-    animateBall(tableView: tableView)
-    
     }
     
     
-//     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        // tableView.deselectRow(at: indexPath, animated: true)
-//     }
-    
-    
+   // send the data to the detailed information
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailSegue"  {
             if let indexPath = tableView.indexPathForSelectedRow {

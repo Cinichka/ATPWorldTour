@@ -2,14 +2,13 @@
 //  ATPLiveTVCell.swift
 //  ATPWorldTour
 //
-//  Created by Вероника Садовская on 28.06.2018.
+//  Created by Veronika Sadovskaya on 28.06.2018.
 //  Copyright © 2018 Veronika Sadovskaya. All rights reserved.
 //
 
 import UIKit
 
 class ATPLiveTVCell: UITableViewCell {
-
     @IBOutlet weak var cortName: UILabel!
     @IBOutlet weak var playerOneNameTeamOne: UILabel!
     @IBOutlet weak var playerTwoNameTeamOne: UILabel!

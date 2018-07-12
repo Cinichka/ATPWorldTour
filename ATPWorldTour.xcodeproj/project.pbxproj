@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9F02156820EA0C5600336B9B /* DetailATPLiveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F02156720EA0C5600336B9B /* DetailATPLiveTVC.swift */; };
-		9F02156C20EBA15E00336B9B /* DetailATPLiveTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F02156B20EBA15E00336B9B /* DetailATPLiveTVCell.swift */; };
 		9F2DC0F920F2260500885865 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2DC0F820F2260500885865 /* Animation.swift */; };
 		9F2DC0FD20F273F800885865 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 9F2DC0FC20F273F800885865 /* .gitignore */; };
 		9FFDE4E320E537B00025CC52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE4E220E537B00025CC52 /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		9F02156720EA0C5600336B9B /* DetailATPLiveTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailATPLiveTVC.swift; sourceTree = "<group>"; };
-		9F02156B20EBA15E00336B9B /* DetailATPLiveTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailATPLiveTVCell.swift; sourceTree = "<group>"; };
 		9F2DC0F820F2260500885865 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		9F2DC0FC20F273F800885865 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9FFDE4DF20E537B00025CC52 /* ATPWorldTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATPWorldTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,7 +76,6 @@
 				9FFDE4E220E537B00025CC52 /* AppDelegate.swift */,
 				9FFDE4FE20E53B240025CC52 /* Model */,
 				9FFDE4E620E537B00025CC52 /* Main.storyboard */,
-				9F02156B20EBA15E00336B9B /* DetailATPLiveTVCell.swift */,
 				9F02156720EA0C5600336B9B /* DetailATPLiveTVC.swift */,
 				9F2DC0F820F2260500885865 /* Animation.swift */,
 				9FFDE50120E562EA0025CC52 /* ATPLiveTVCell.swift */,
@@ -179,7 +176,6 @@
 				9FFDE4F520E538020025CC52 /* Scores.swift in Sources */,
 				9FFDE4FD20E539DB0025CC52 /* Team.swift in Sources */,
 				9FFDE4F720E538430025CC52 /* LiveScores.swift in Sources */,
-				9F02156C20EBA15E00336B9B /* DetailATPLiveTVCell.swift in Sources */,
 				9FFDE4E320E537B00025CC52 /* AppDelegate.swift in Sources */,
 				9F02156820EA0C5600336B9B /* DetailATPLiveTVC.swift in Sources */,
 				9FFDE50220E562EA0025CC52 /* ATPLiveTVCell.swift in Sources */,
