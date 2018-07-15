@@ -167,8 +167,8 @@ class ATPLiveTVC: UITableViewController  {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let dvc = segue.destination as! DetailATPLiveTVC
                 dvc.tournamentDetail = [tournaments[indexPath.section]]
-                dvc.matchDetail = [match[indexPath.row]]
-                dvc.playersName = match[indexPath.row].teamOne.playerOneName
+                dvc.matchDetail = [tournaments[indexPath.section].matches[indexPath.row]]
+                dvc.playersName = tournaments[indexPath.section].matches[indexPath.row].teamOne.playerOneName
             }
         }
     }
