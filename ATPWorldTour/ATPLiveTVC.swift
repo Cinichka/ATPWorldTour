@@ -64,13 +64,14 @@ class ATPLiveTVC: UITableViewController  {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
      
-        return "\(self.tournaments[section].name)"
+        return "       \(self.tournaments[section].name)"
     }
     
 // сustomize the section
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        header.textLabel?.adjustsFontSizeToFitWidth = true
         header.textLabel?.textAlignment = .center
         header.backgroundView?.backgroundColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 45, height: 45))
@@ -107,49 +108,67 @@ class ATPLiveTVC: UITableViewController  {
         
          // if the pair game
         } else {
+            cell.playerTwoNameTeamOne.isHidden = false
+            cell.flagPlayerTwoTeamOne.isHidden = false
+            cell.flagPlayerTwoTeamTwo.isHidden = false
+            cell.playerTwoNameTeamTwo.isHidden = false
             cell.playerTwoNameTeamOne.text = match[indexPath.row].teamOne.playerTwoName
             cell.flagPlayerTwoTeamOne?.image = UIImage(named: String(match[indexPath.row].teamOne.playerTwoFlag![flag]))
             cell.flagPlayerTwoTeamTwo?.image = UIImage(named: String(match[indexPath.row].teamTwo.playerTwoFlag![flag]))
             cell.playerTwoNameTeamTwo.text = match[indexPath.row].teamTwo.playerTwoName
         }
          //checking the result of the game
-        if  match[indexPath.row].teamOne.teamStatus == TeamStatus.wonGame {
+        if  match[indexPath.row].teamOne.teamStatus != TeamStatus.empty {
+            cell.imageWinTwo.alpha = 0
+            cell.imageWinOne.alpha = 1
+            if match[indexPath.row].teamOne.teamStatus == TeamStatus.wonGame {
             cell.imageWinOne.image = UIImage(named: "checked")
-        } else {
+            } else {
+              cell.imageWinOne.image = UIImage(named: "tennis")
+            }
+        } else if match[indexPath.row].teamTwo.teamStatus != TeamStatus.empty {
+            cell.imageWinOne.alpha = 0
+            cell.imageWinTwo.alpha = 1
+            if match[indexPath.row].teamTwo.teamStatus == TeamStatus.wonGame {
             cell.imageWinTwo.image = UIImage(named: "checked")
+        } else {
+            cell.imageWinTwo.image = UIImage(named: "tennis")
+        }
         }
         //output of results on sets
-        
+        cell.setTwoTeamOne.text  = ""
+        cell.setTwoTeamTwo.text  = ""
+        cell.setThreeTeamOne.text  = ""
+        cell.setThreeTeamTwo.text  = ""
+        cell.setFourTeamOne.text  = ""
+        cell.setFourTeamTwo.text  = ""
+        cell.setFiveTeamOne.text  = ""
+        cell.setFiveTeamTwo.text  = ""
         guard let setOneTeamOne = Int(match[indexPath.row].teamOne.scores["SetOne"]!!) else {return cell}
         cell.setOneTeamOne.isEnabled = true
-        cell.setOneTeamOne.text = String(setOneTeamOne)
-        guard let setOneTeamTwo = Int(match[indexPath.row].teamTwo.scores["SetOne"]!!) else {return cell}
         cell.setOneTeamTwo.isEnabled = true
-        cell.setOneTeamTwo.text =  String(setOneTeamTwo)
+        cell.setOneTeamOne.text = String(setOneTeamOne)
+        cell.setOneTeamTwo.text =  match[indexPath.row].teamTwo.scores["SetOne"]!
         guard let setTwo = Int(match[indexPath.row].teamOne.scores["SetTwo"]!!) else {return cell}
         cell.setTwoTeamOne.isEnabled = true
-        cell.setTwoTeamOne.text = String(setTwo)
-        guard let setTwoTeamTwo = Int(match[indexPath.row].teamTwo.scores["SetTwo"]!!) else {return cell}
         cell.setTwoTeamTwo.isEnabled = true
-        cell.setTwoTeamTwo.text =  String(setTwoTeamTwo)
+        cell.setTwoTeamOne.text = String(setTwo)
+        cell.setTwoTeamTwo.text =  match[indexPath.row].teamTwo.scores["SetTwo"]!
         guard let setThree = Int(match[indexPath.row].teamOne.scores["SetThree"]!!) else {return cell}
         cell.setThreeTeamOne.isEnabled = true
-        cell.setThreeTeamOne.text = String(setThree)
-        guard let setThreeTeamTwo = Int(match[indexPath.row].teamTwo.scores["SetThree"]!!) else {return cell}
         cell.setThreeTeamTwo.isEnabled = true
-        cell.setThreeTeamTwo.text =  String(setThreeTeamTwo)
+        cell.setThreeTeamOne.text = String(setThree)
+        cell.setThreeTeamTwo.text =  match[indexPath.row].teamTwo.scores["SetThree"]!
         guard let setFour = Int(match[indexPath.row].teamOne.scores["SetFour"]!!) else {return cell}
         cell.setFourTeamOne.isEnabled = true
-        cell.setFourTeamOne.text = String(setFour)
-        guard let setFourTeamTwo = Int(match[indexPath.row].teamTwo.scores["SetFour"]!!) else {return cell}
         cell.setFourTeamTwo.isEnabled = true
-        cell.setFourTeamTwo.text =  String(setFourTeamTwo)
+        cell.setFourTeamOne.text = String(setFour)
+        cell.setFourTeamTwo.text =  match[indexPath.row].teamTwo.scores["SetFour"]!
         guard let setFive = Int(match[indexPath.row].teamOne.scores["SetFive"]!!) else {return cell}
         cell.setFiveTeamOne.isEnabled = true
-        cell.setFiveTeamOne.text = String(setFive)
-        guard let setFiveTeamTwo = Int(match[indexPath.row].teamTwo.scores["SetFive"]!!) else {return cell}
         cell.setFiveTeamTwo.isEnabled = true
-        cell.setFiveTeamTwo.text =  String(setFiveTeamTwo)
+        cell.setFiveTeamOne.text = String(setFive)
+        cell.setFiveTeamTwo.text = match[indexPath.row].teamTwo.scores["SetFive"]!
         return cell
     }
     

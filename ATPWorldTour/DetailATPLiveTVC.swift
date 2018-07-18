@@ -10,6 +10,7 @@ import UIKit
 
 class DetailATPLiveTVC: UITableViewController {    
     
+    @IBOutlet weak var matchInfo: UILabel!
     @IBOutlet weak var players: UILabel!
     @IBOutlet weak var fotoTeamOnePlayerOneLable: UILabel!
     @IBOutlet weak var fotoTeamOnePlayerTwoLable: UILabel!
@@ -62,7 +63,9 @@ class DetailATPLiveTVC: UITableViewController {
             players.text = matchDetail[0].teamOne.playerOneName + "/" + matchDetail[0].teamOne.playerTwoName + " vs. " + matchDetail[0].teamTwo.playerOneName  + "/" + matchDetail[0].teamTwo.playerTwoName + " | " + tournamentDetail[0].name + " | " + tournamentDetail[0].location
             
         }
-        
+        if matchDetail[0].matchInfo != "" {
+            matchInfo.text = matchDetail[0].matchInfo
+        }
         fotoTeamOnePlayerOneLable.text = matchDetail[0].teamOne.playerOneName
         fotoTeamTwoPlayerOneLable.text = matchDetail[0].teamTwo.playerOneName
         loadImage(imageURL: self.matchDetail[0].teamOne.playerOneHeadshot, lable: fotoTeamOnePlayerOneImage)
@@ -91,10 +94,27 @@ class DetailATPLiveTVC: UITableViewController {
             playerTwoNameTeamTwo.text = matchDetail[0].teamTwo.playerTwoName
         }
         //checking the result of the game
-        if  matchDetail[0].teamOne.teamStatus == TeamStatus.wonGame {
-            imageWinOne.image = UIImage(named: "checked")
-        } else {
-            imageWinTwo.image = UIImage(named: "checked")
+//        if  matchDetail[0].teamOne.teamStatus == TeamStatus.wonGame {
+//            imageWinOne.image = UIImage(named: "checked")
+//        } else {
+//            imageWinTwo.image = UIImage(named: "checked")
+//        }
+        if  matchDetail[0].teamOne.teamStatus != TeamStatus.empty {
+            imageWinTwo.alpha = 0
+            imageWinOne.alpha = 1
+            if matchDetail[0].teamOne.teamStatus == TeamStatus.wonGame {
+                imageWinOne.image = UIImage(named: "checked")
+            } else {
+                imageWinOne.image = UIImage(named: "tennis")
+            }
+        } else if matchDetail[0].teamTwo.teamStatus != TeamStatus.empty {
+            imageWinOne.alpha = 0
+            imageWinTwo.alpha = 1
+            if matchDetail[0].teamTwo.teamStatus == TeamStatus.wonGame {
+                imageWinTwo.image = UIImage(named: "checked")
+            } else {
+                imageWinTwo.image = UIImage(named: "tennis")
+            }
         }
         //output of results on sets
         guard let setOneTeamOne = Int(matchDetail[0].teamOne.scores["SetOne"]!!) else {return}

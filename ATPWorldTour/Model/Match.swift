@@ -10,7 +10,7 @@ import Foundation
 struct Match: Decodable {
     let id, eventID, roundTitle, matchType: String
     let statsLink, headToHeadLink, secondScreenLink: String
-    let railPosition: Int
+    let railPosition: Int?
     let liveListingPosition: Int?
     let status: String
     let numberOfSets: Int
