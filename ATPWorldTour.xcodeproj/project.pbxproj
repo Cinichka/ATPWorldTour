@@ -53,6 +53,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F6A0E652198A53000EFD381 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F2DC0F820F2260500885865 /* Animation.swift */,
+				9FFDE50120E562EA0025CC52 /* ATPLiveTVCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9F6A0E662198A54B00EFD381 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9F02156720EA0C5600336B9B /* DetailATPLiveTVC.swift */,
+				9FFDE4FF20E53F020025CC52 /* ATPLiveTVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		9FFDE4D620E537B00025CC52 = {
 			isa = PBXGroup;
 			children = (
@@ -74,12 +92,10 @@
 			isa = PBXGroup;
 			children = (
 				9FFDE4E220E537B00025CC52 /* AppDelegate.swift */,
-				9FFDE4FE20E53B240025CC52 /* Model */,
 				9FFDE4E620E537B00025CC52 /* Main.storyboard */,
-				9F02156720EA0C5600336B9B /* DetailATPLiveTVC.swift */,
-				9F2DC0F820F2260500885865 /* Animation.swift */,
-				9FFDE50120E562EA0025CC52 /* ATPLiveTVCell.swift */,
-				9FFDE4FF20E53F020025CC52 /* ATPLiveTVC.swift */,
+				9FFDE4FE20E53B240025CC52 /* Model */,
+				9F6A0E652198A53000EFD381 /* View */,
+				9F6A0E662198A54B00EFD381 /* Controller */,
 				9FFDE4E920E537B40025CC52 /* Assets.xcassets */,
 				9FFDE4EB20E537B40025CC52 /* LaunchScreen.storyboard */,
 				9FFDE4EE20E537B40025CC52 /* Info.plist */,
